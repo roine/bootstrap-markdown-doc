@@ -11,6 +11,7 @@
   - [Share with a friend](#s_share)
   - [Newsletter](#s_newsletter)
   - [FaceBook](#s_facebook)
+ - [Back-Office](#bo)
 
 ## <a id="shortcode"></a>ShortCode
 
@@ -99,7 +100,7 @@ Example of use:
 
     [facebook text='Facebook']
 
-
+## <a id="bo"></a>Back-office
 </xmp>
 <style>
 h1, h2, h3, h4, h5, h6{
@@ -124,8 +125,12 @@ ul{
 }
 .active{
   background:rgba(255, 99, 71, 0.43);
-  -webkit-animation:blink 1s 2 linear;
   padding:10px;
+  -webkit-animation:blink 1s 2 linear;
+  -moz-animation:blink 1s 2 linear;
+  -ms-animation:blink 1s 2 linear;
+  -o-animation:blink 1s 2 linear;
+  animation:blink 1s 2 linear;
 }
 .active:hover{
   background:none;
@@ -134,15 +139,103 @@ ul{
   display:none;
 }
 
-@-webkit-keyframes blink{
-  from{
-    background:rgba(255, 99, 71, 0.43);
+.fixed{
+  position:fixed;
+  left:-100%;
+  -webkit-transition:left 1s ease;
+  -moz-transition:left 1s ease;
+  -o-transition:left 1s ease;
+  -ms-transition:left 1s ease;
+  transition:left 1s ease;
+  background: #e9e9e9;
+  opacity:.2;
+}
+.fixed:hover{
+  opacity:1;
+}
+.fixed ul{
+    margin: 0;
+    list-style: inside none;
+}
+.fixed ul ul{
+  padding: 0;
+  padding-top: 5px;
+  padding-bottom:10px;
+}
+.fixed ul ul li{
+  padding: 3px
+}
+
+.fixed > ul > li > a{
+  font-weight:bold;
+  text-decoration: underline;
+}
+.fixed > ul > li > a:not(:first){
+margin-top:5px;
+}
+@media only screen and (max-width: 1204px){
+  .fixed{
+    display:none;
   }
-  50%{
-    background:rgba(255, 99, 71, 0.1);
+}
+
+@keyframes "blink" {
+  from {
+    background: rgba(255, 99, 71, 0.43);
   }
-  to{
-    background:rgba(255, 99, 71, 0.43);
+  50% {
+    background: rgba(255, 99, 71, 0.1);
+  }
+  to {
+    background: rgba(255, 99, 71, 0.43);
+  }
+}
+
+@-moz-keyframes blink {
+  from {
+    background: rgba(255, 99, 71, 0.43);
+  }
+  50% {
+    background: rgba(255, 99, 71, 0.1);
+  }
+  to {
+    background: rgba(255, 99, 71, 0.43);
+  }
+}
+
+@-webkit-keyframes "blink" {
+  from {
+   background: rgba(255, 99, 71, 0.43);
+  }
+  50% {
+    background: rgba(255, 99, 71, 0.1);
+  }
+  to {
+    background: rgba(255, 99, 71, 0.43);
+  }
+}
+
+@-ms-keyframes "blink" {
+  from {
+    background: rgba(255, 99, 71, 0.43);
+  }
+  50% {
+    background: rgba(255, 99, 71, 0.1);
+  }
+  to {
+    background: rgba(255, 99, 71, 0.43);
+  }
+}
+
+@-o-keyframes "blink" {
+  from {
+   background: rgba(255, 99, 71, 0.43);
+  }
+  50% {
+    background: rgba(255, 99, 71, 0.1);
+  }
+  to {
+    background: rgba(255, 99, 71, 0.43);
   }
 }
 
@@ -159,8 +252,7 @@ window.onload = window.onhashchange = function(){
   // remove all active class
   var all = document.getElementsByTagName("*");
   for (var i=0, max=all.length; i < max; i++) {
-    // all[i].className = all[i].className.replace(/active/,'');
-    all[i].classList.remove('active')
+    all[i].className = all[i].className.replace(/active/, '');
   }
 
 
@@ -183,6 +275,26 @@ window.onload = window.onhashchange = function(){
     // hide the non wrapped nodes
     a.className += ' hide';
 
+  }
+}
+// fix the TOC when required
+var toc = document.getElementsByTagName('ul')[0];
+var fixedMenuHeight = document.getElementsByClassName('navbar-inner')[0].offsetHeight;
+// copy paste the Table of content
+var tocFixed = document.createElement('div');
+tocFixed.className = 'fixed';
+tocFixed.innerHTML = toc.outerHTML;
+document.body.appendChild(tocFixed);
+
+window.onscroll = function(e){
+  if(this.pageYOffset > toc.offsetTop-fixedMenuHeight+toc.offsetHeight){
+    if(!~toc.className.split(' ').indexOf('fixed')){
+      tocFixed.style.top = toc.offsetTop-fixedMenuHeight+'px';
+      tocFixed.style.left = 0
+    }
+  }
+  else{
+    tocFixed.style.left = '-100%';
   }
 }
 
