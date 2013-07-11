@@ -1,11 +1,105 @@
 <!DOCTYPE html>
 <html>
-<title>documentation</title>
+<title>Silk Road Of Pop documentation</title>
 
 <xmp theme="readable" style="display:none;">
+# Documentation for Silk Road of Pop
+
+ - [Shortcode](#shortcode)
+  - [Vimeo](#s_vimeo)
+  - [Youtube](#s_youtube)
+  - [Share with a friend](#s_share)
+  - [Newsletter](#s_newsletter)
+  - [FaceBook](#s_facebook)
+
+## <a id="shortcode"></a>ShortCode
+
+Shortcode are piece of small you can use in your wordpress text editor. When displaying the article the shortcode will be replace by a link, a video, a music...
+i.e: `[link_to_homepage] => <a href='/'>Homepage</a>`
+
+
+### <a id="s_vimeo"></a>VIMEO
+
+vimeo takes 9 arguments:
+
+  - **video_id** REQUIRED
+  - **color**  (rgb, rgba, hexadecimal, string name), default: ff0179
+  - **width** (px, em, rem, pc, %) default: 100%
+  - **height** (px, em, rem, pc, %), default: 350
+  - **portrait** (1 for yes OR 0 for no) will display or not the portrait of the author on the video, default: 1
+  - **title** (1 for yes OR 0 for no) will display or not the title, default 1
+  - **byline** (1 for yes OR 0 for no) will display or not the sub line, default 1
+  - **autoplay** (1 for yes OR 0 for no) will autoplaythe video or not, default 0
+  - **loop** (1 for yes OR 0 for no) will play the video over and over again or not, default 0
+
+Example of use
+
+    [vimeo video_id=55860744 portrait='0' title='1' autoplay='0' byline='0' height='350' width='100%' loop='1' color='E9475E']
+
+
+### <a id="s_youtube"></a>YOUTUBE
+
+`youtube` takes 3 arguments:
+
+ - **video_id** is the id of the video(last characteres of the url, i.e: youtube.com/watch?v=**3ikye7Qc7Ak**), *REQUIRED*
+ - **height**, is the height of the video container _default:315_
+ - **width**, is the width of the video container _default:420_
+
+Example of use
+
+    [youtube video_id=krdQAhZhbBg width='100%' height='400']
+
+### <a id="s_share"></a>SHARE WITH A FRIEND BUTTON
+
+`share_with_friend` takes 2 arguments:
+
+ - **text** the text for the link, _default: 'Share With a Friend'_
+ - **style** the style to apply to the link (button, tiny, small, medium, large, expand, secondary, alert, sucess, pink, radius, round, disabled), _default: nothing_
+
+Example of use:
+
+    [share_with_friend text='Share' style='button tiny radius success']
+
+### <a id="s_newsletter"></a>SUBSCRIBE TO NEWSLETTER BUTTON
+
+`subscribe_newsletter` takes 2 arguments:
+
+ - **text** the text for the link, _default: 'Subscribe to the Newsletter'_
+ - **style** the style to apply to the link (button, tiny, small, medium, large, expand, secondary, alert, sucess, pink, radius, round, disabled) _default: nothing_
+
+Example of use:
+
+    [subscribe_newsletter text='Subscribe' style='button large expand rounded success']
+
+`newsletter` (alias of subscribe_newsletter) takes 2 arguments:
+
+ - **text** the text for the link, _default 'Subscribe to the Newsletter'_
+ - **style** the style to apply to the link (button, tiny, small, medium, large, expand, secondary, alert, sucess, pink, radius, round, disabled), _default: nothing_
+
+Example of use:
+
+    [newsletter text='Subscribe' style='button large expand rounded success']
+
+### <a id="s_facebook"></a>LINK TO FACEBOOK PAGE
+
+`fb_link` takes 1 argument:
+
+ - **text** the text for the link, _default: 'Our Facebook Page'_
+
+Example of use:
+
+    [fb_link text='Facebook']
+
+`facebook` (alias of fb_link) takes 1 argument:
+
+ - **text** the text for the link, _default 'Our Facebook Page'_
+
+Example of use:
+
+    [facebook text='Facebook']
+
 
 </xmp>
-
 <style>
 h1, h2, h3, h4, h5, h6{
   position:relative;
