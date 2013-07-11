@@ -15,12 +15,13 @@
 ## <a id="shortcode"></a>ShortCode
 
 Shortcode are piece of small you can use in your wordpress text editor. When displaying the article the shortcode will be replace by a link, a video, a music...
+
 i.e: `[link_to_homepage] => <a href='/'>Homepage</a>`
 
 
 ### <a id="s_vimeo"></a>VIMEO
 
-vimeo takes 9 arguments:
+`vimeo` takes 9 arguments:
 
   - **video_id** REQUIRED
   - **color**  (rgb, rgba, hexadecimal, string name), default: ff0179
@@ -105,15 +106,79 @@ h1, h2, h3, h4, h5, h6{
   position:relative;
   padding:5px 15px;
 }
-  :target{
-    background:rgba(0,0,0,.2);
-    border-radius:3px;
-    position:absolute;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
+ul{
+  list-style:inside;
+  padding:10px;
+}
+:target{
+  background:rgba(0,0,0,.2);
+  border-radius:3px;
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+}
+.active{
+  background:rgba(255, 99, 71, 0.43);
+  -webkit-animation:blink 1s 2 linear;
+  padding:10px;
+}
+.hide{
+  display:none;
+}
+
+@-webkit-keyframes blink{
+  from{
+    background:rgba(255, 99, 71, 0.43);
   }
+  50%{
+    background:rgba(255, 99, 71, 0.1);
+  }
+  to{
+    background:rgba(255, 99, 71, 0.43);
+  }
+}
+
 </style>
 <script src="strapdown.js"></script>
+<script>
+// snippet from http://stackoverflow.com/questions/4793604/how-to-do-insert-after-in-javascript-without-using-a-library
+var insertAfter = function(referenceNode, newNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+}
+
+window.onload = window.onhashchange = function(){
+
+  // remove all active class
+  var all = document.getElementsByTagName("*");
+  for (var i=0, max=all.length; i < max; i++) {
+    // all[i].className = all[i].className.replace(/active/,'');
+    all[i].classList.remove('active')
+  }
+
+
+  // wrap the content into a div
+  var a = document.getElementById(location.hash.slice(1)).parentNode;
+  var div = document.createElement('div');
+  div.className = 'active';
+  var arr = [];
+  while(1){
+    // loop the sibling until...
+    a = a.nextSibling;
+    // we meet the last node or the next node is a header
+    if(a === null || (a.tagName &&  !!~'h1 h2 h3 h4 h5 h6'.split(' ').indexOf(a.tagName.toLowerCase()))){
+      div.innerHTML = arr.join("\n");
+      insertAfter(document.getElementById(location.hash.slice(1)).parentNode, div);
+      break;
+    }
+    // wrap into a div for prettier display
+    arr.push(a.outerHTML);
+    // hide the non wrapped nodes
+    a.className += ' hide';
+
+  }
+}
+
+</script>
 </html>
