@@ -152,7 +152,9 @@ var insertAfter = function(referenceNode, newNode) {
 }
 
 window.onload = window.onhashchange = function(){
-
+  var a = document.getElementById(location.hash.slice(1));
+  // stop right now if no hash is provided
+  if(!a) return;
   // remove all active class
   var all = document.getElementsByTagName("*");
   for (var i=0, max=all.length; i < max; i++) {
@@ -161,7 +163,8 @@ window.onload = window.onhashchange = function(){
 
 
   // wrap the content into a div
-  var a = document.getElementById(location.hash.slice(1)).parentNode;
+
+  a = a.parentNode;
   var div = document.createElement('div');
   div.className = 'active';
   var arr = [];
@@ -187,7 +190,7 @@ var fixedMenuHeight = document.getElementsByClassName('navbar-inner')[0].offsetH
 // copy paste the Table of content
 var tocFixed = document.createElement('div');
 tocFixed.className = 'fixed';
-tocFixed.innerHTML = toc.outerHTML;
+tocFixed.innerHTML = toc && toc.outerHTML;
 document.body.appendChild(tocFixed);
 
 window.onscroll = function(e){
