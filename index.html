@@ -152,21 +152,21 @@ var insertAfter = function(referenceNode, newNode) {
 }
 
 window.onload = window.onhashchange = function(){
+
   var a = document.getElementById(location.hash.slice(1));
   // stop right now if no hash is provided
   if(!a) return;
+  a = a.parentNode;
+
   // remove all active class
   var all = document.getElementsByTagName("*");
   for (var i=0, max=all.length; i < max; i++) {
     all[i].className = all[i].className.replace(/active/, '');
   }
 
-
   // wrap the content into a div
-
-  a = a.parentNode;
   var div = document.createElement('div');
-  div.className = 'active';
+  div.className = ' active';
   var arr = [];
   while(1){
     // loop the sibling until...
